@@ -3,11 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{% block title %}CostBird{% endblock %} — расходы маркетплейсов в одном API</title>
-<meta name="description" content="{% block description %}Подключите один API и получайте данные о расходах с Ozon, Wildberries и Яндекс Маркет{% endblock %}">
+<title>{% block title %}CostBird{% endblock %} — расходы маркетплейсов в одном месте</title>
+<meta name="description" content="{% block description %}Все расходы с Ozon, Wildberries и Яндекс Маркет в одном месте{% endblock %}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Syne:wght@700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='cabinet.css') }}">
 {% block head %}{% endblock %}
 </head>
 <body>
@@ -24,10 +25,12 @@
   <div class="nav-links">
     <a href="/#features">Возможности</a>
     <a href="/#demo">Демо</a>
-    <a href="/pricing">Тарифы</a>
-    <a href="/docs">Документация</a>
+    <a href="/#pricing">Тарифы</a>
   </div>
-  <a href="/#cta" class="nav-cta">Получить доступ</a>
+  <div style="display:flex;gap:10px;align-items:center">
+    <a href="/auth/login" class="nav-cta" style="background:transparent;border:1px solid var(--border2);color:var(--ink2)">Войти</a>
+    <a href="/auth/register" class="nav-cta">Начать бесплатно</a>
+  </div>
 </nav>
 
 <main>
@@ -44,7 +47,7 @@
     CostBird
   </a>
   <span>© 2024 CostBird</span>
-  <a href="mailto:hello@costbird.ru">hello@costbird.ru</a>
+  <a href="mailto:hello@costbird.ru" style="color:var(--muted);text-decoration:none">hello@costbird.ru</a>
 </footer>
 
 <canvas id="bg-canvas"></canvas>
