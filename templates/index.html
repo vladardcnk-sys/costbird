@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% block title %}CostBird{% endblock %}
+
+{% block content %}
+
+<!-- HERO -->
+<section class="hero-wrap">
+  <div class="orb orb1"></div>
+  <div class="hero">
+    <div class="hero-left">
+      <div class="hero-badge"><div class="badge-dot"></div>API для маркетплейсов · 2024</div>
+      <h1>Все расходы<br><span class="acc">в одном запросе</span></h1>
+      <p class="hero-sub">Подключите CostBird API и получайте данные о комиссиях, логистике, хранении и штрафах с Ozon, Wildberries и Яндекс Маркет в единой структуре.</p>
+      <div class="hero-actions">
+        <a href="#cta" class="btn">⚡ Начать бесплатно</a>
+        <a href="#demo" class="btn btn-ghost">Посмотреть демо →</a>
+      </div>
+      <p class="hero-note">До 1 000 запросов бесплатно · Без привязки карты</p>
+    </div>
+    <div class="code-card">
+      <div class="code-topbar">
+        <div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div>
+        <div class="code-tabs">
+          <span class="ctab active" data-tab="expenses">expenses</span>
+          <span class="ctab" data-tab="summary">summary</span>
+          <span class="ctab" data-tab="breakdown">breakdown</span>
+        </div>
+      </div>
+      <pre id="code-out"></pre>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="mp-row">
+  <div class="mp-track" id="marquee"></div>
+</div>
+
+<!-- STATS -->
+<div class="stats-row">
+  <div class="reveal"><div class="stat-num"><span data-count="3">0</span></div><div class="stat-label">маркетплейса в одном API</div></div>
+  <div class="reveal"><div class="stat-num"><span data-count="12">0</span><span class="acc">+</span></div><div class="stat-label">категорий расходов</div></div>
+  <div class="reveal"><div class="stat-num"><span data-count="200">0</span><span class="acc" style="font-size:1.8rem">мс</span></div><div class="stat-label">среднее время ответа</div></div>
+</div>
+
+<!-- FEATURES -->
+<section class="section" id="features">
+  <div class="reveal">
+    <div class="s-label">Возможности</div>
+    <h2>Всё что нужно разработчику и продавцу</h2>
+  </div>
+  <div class="feats">
+    {% for feat in [
+      ("≡", "Единый формат", "Все маркетплейсы возвращают данные в одной JSON-схеме. Один парсер — три площадки."),
+      ("▦", "Готовый дашборд", "Веб-интерфейс с графиками, фильтрами по датам и маркетплейсам, экспорт в Excel."),
+      ("↗", "Исторические данные", "Запрашивайте расходы за любой период. Стройте тренды, сравнивайте месяцы."),
+      ("⬡", "Безопасная авторизация", "Токены маркетплейсов шифруются AES-256. OAuth 2.0 для доступа к API."),
+      ("▲", "Разбивка по статьям", "Комиссии, логистика, хранение, штрафы, реклама — каждая статья в поле."),
+      ("◎", "Авто-обновление", "Кэш с TTL — данные свежие всегда. Не нужно дёргать API вручную."),
+    ] %}
+    <div class="feat reveal">
+      <div class="feat-icon">{{ feat[0] }}</div>
+      <div class="feat-title">{{ feat[1] }}</div>
+      <div class="feat-desc">{{ feat[2] }}</div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- DEMO -->
+<section class="demo-section" id="demo">
+  <div class="section">
+    <div class="demo-inner">
+      <div class="reveal">
+        <div class="s-label">Интерактивное демо</div>
+        <h2>Выберите маркетплейс</h2>
+        <p style="color:var(--ink2);font-size:14px;line-height:1.7;margin-bottom:1.5rem">Переключайтесь и смотрите реальный формат данных API.</p>
+        <div class="mp-selector">
+          <button class="mp-btn active" data-mp="wb">Wildberries</button>
+          <button class="mp-btn" data-mp="ozon">Ozon</button>
+          <button class="mp-btn" data-mp="ym">Яндекс Маркет</button>
+        </div>
+      </div>
+      <div id="expense-panel" class="reveal"></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="cta">
+  <div class="orb" style="width:400px;height:400px;background:rgba(124,58,237,.18);top:-100px;left:50%;transform:translateX(-50%)"></div>
+  <div class="cta-inner reveal">
+    <div class="s-label">Ранний доступ</div>
+    <h2>Запускаемся скоро</h2>
+    <p class="cta-sub">Оставьте email — пришлём доступ первыми и дадим 3 месяца Про бесплатно.</p>
+    <div class="email-row">
+      <input type="email" id="email-in" placeholder="ваш@email.ru">
+      <button class="btn" id="sub-btn">Получить доступ</button>
+    </div>
+    <p style="font-size:12px;color:var(--muted);margin-top:1rem">Уже 247 продавцов в очереди</p>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='index.js') }}"></script>
+{% endblock %}
