@@ -122,3 +122,81 @@ h2{font-family:'Syne',sans-serif;font-size:clamp(1.8rem,3vw,2.6rem);font-weight:
   .nav-links{display:none}
   .email-row{flex-direction:column}
 }
+
+/* EXPENSE CARD (hero) */
+.expense-card{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,.5);padding:1.5rem}
+.expense-card-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem}
+.expense-card-title{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:500;color:var(--ink2)}
+.mp-dot-sm{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.expense-card-total{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:var(--ink)}
+.expense-table{display:flex;flex-direction:column;gap:10px;margin-bottom:1.25rem}
+.et-row{display:grid;grid-template-columns:1fr 1fr auto;align-items:center;gap:10px}
+.et-label{font-size:13px;color:var(--ink2)}
+.et-bar-wrap{height:6px;background:rgba(255,255,255,.06);border-radius:4px;overflow:hidden}
+.et-bar{height:100%;border-radius:4px;transition:width .8s cubic-bezier(.4,0,.2,1)}
+.et-val{font-size:13px;font-weight:500;color:var(--ink);text-align:right;white-space:nowrap}
+.expense-card-footer{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);border-top:1px solid var(--border);padding-top:1rem}
+.trend-up{color:#10b981}
+
+/* HERO TRUST */
+.hero-trust{display:flex;align-items:center;gap:1.5rem;margin-top:1.5rem}
+.trust-item{display:flex;flex-direction:column}
+.trust-num{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:var(--ink)}
+.trust-label{font-size:11px;color:var(--muted)}
+.trust-sep{width:1px;height:32px;background:var(--border)}
+
+/* DASHBOARD MOCKUP */
+.dash-mockup{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,.6)}
+.dash-topbar{background:#0a0f1e;padding:10px 14px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border)}
+.dash-dots{display:flex;gap:5px}
+.dash-dots span{width:9px;height:9px;border-radius:50%}
+.dash-dots span:nth-child(1){background:#ff5f57}
+.dash-dots span:nth-child(2){background:#febc2e}
+.dash-dots span:nth-child(3){background:#28c840}
+.dash-title{font-size:11px;color:var(--ink2);font-family:'Fira Code',monospace;margin:0 auto}
+.dash-live{display:flex;align-items:center;gap:5px;font-size:11px;color:#10b981}
+.live-dot{width:6px;height:6px;border-radius:50%;background:#10b981;animation:pulse 2s infinite}
+.dash-body{padding:1rem}
+.dash-tabs{display:flex;gap:6px;margin-bottom:1rem}
+.dash-tab{background:none;border:1px solid var(--border);border-radius:6px;padding:5px 10px;font-size:11px;color:var(--ink2);cursor:pointer;font-family:'Inter',sans-serif;transition:all .15s}
+.dash-tab.active{background:var(--acc-bg);border-color:var(--acc-border);color:var(--acc3)}
+.dash-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:1rem}
+.dash-kpi{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:8px 10px}
+.kpi-label{font-size:10px;color:var(--muted);margin-bottom:3px}
+.kpi-val{font-size:15px;font-weight:700;color:var(--ink);font-family:'Syne',sans-serif;margin-bottom:2px}
+.kpi-delta{font-size:10px}
+.kpi-red{color:#ef4444}
+.kpi-green{color:#10b981}
+.dash-chart-row{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.dash-bars{flex:1;display:flex;flex-direction:column;gap:5px}
+.db-row{display:flex;align-items:center;gap:6px}
+.db-label{font-size:10px;color:var(--ink2);width:80px;flex-shrink:0}
+.db-track{flex:1;height:5px;background:var(--bg3);border-radius:3px;overflow:hidden}
+.db-fill{height:100%;border-radius:3px;transition:width .6s cubic-bezier(.4,0,.2,1)}
+.db-val{font-size:10px;color:var(--ink);width:55px;text-align:right;flex-shrink:0}
+.dash-alert{background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.25);border-radius:7px;padding:7px 10px;font-size:11px;color:#fbbf24;display:flex;align-items:center;gap:6px}
+
+/* PAIN POINTS */
+.pain-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+.pain-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.75rem;transition:all .2s}
+.pain-card:hover{border-color:var(--acc-border);transform:translateY(-3px)}
+.pain-icon{font-size:2rem;margin-bottom:1rem}
+.pain-title{font-size:15px;font-weight:600;margin-bottom:.6rem;line-height:1.4}
+.pain-desc{font-size:13px;color:var(--ink2);line-height:1.65;margin-bottom:1rem}
+.pain-arrow{font-size:12px;color:var(--acc3);font-weight:500}
+
+/* HOW IT WORKS */
+.steps-grid{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:1rem;align-items:center}
+.step-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.5rem;text-align:center}
+.step-num{width:40px;height:40px;border-radius:50%;background:var(--acc);color:white;font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem}
+.step-title{font-weight:600;margin-bottom:.5rem}
+.step-desc{font-size:13px;color:var(--ink2);line-height:1.6}
+.step-arrow{font-size:1.5rem;color:var(--muted);text-align:center}
+
+@media(max-width:768px){
+  .pain-grid{grid-template-columns:1fr}
+  .steps-grid{grid-template-columns:1fr;gap:.5rem}
+  .step-arrow{display:none}
+  .hero-trust{gap:1rem}
+  .dash-summary{grid-template-columns:repeat(3,1fr)}
+}
