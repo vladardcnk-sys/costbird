@@ -8,25 +8,56 @@
   <div class="orb orb1"></div>
   <div class="hero">
     <div class="hero-left">
-      <div class="hero-badge"><div class="badge-dot"></div>API для маркетплейсов · 2024</div>
-      <h1>Все расходы<br><span class="acc">в одном запросе</span></h1>
-      <p class="hero-sub">Подключите CostBird API и получайте данные о комиссиях, логистике, хранении и штрафах с Ozon, Wildberries и Яндекс Маркет в единой структуре.</p>
+      <div class="hero-badge"><div class="badge-dot"></div>Сервис для продавцов маркетплейсов</div>
+      <h1>Все расходы<br><span class="acc">как на ладони</span></h1>
+      <p class="hero-sub">Подключите CostBird и смотрите сколько вы тратите на комиссии, логистику и хранение на Ozon, Wildberries и Яндекс Маркет — в одном месте.</p>
       <div class="hero-actions">
         <a href="#cta" class="btn">⚡ Начать бесплатно</a>
         <a href="#demo" class="btn btn-ghost">Посмотреть демо →</a>
       </div>
       <p class="hero-note">До 1 000 запросов бесплатно · Без привязки карты</p>
     </div>
-    <div class="code-card">
-      <div class="code-topbar">
-        <div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div>
-        <div class="code-tabs">
-          <span class="ctab active" data-tab="expenses">expenses</span>
-          <span class="ctab" data-tab="summary">summary</span>
-          <span class="ctab" data-tab="breakdown">breakdown</span>
+
+    <!-- EXPENSE TABLE -->
+    <div class="expense-card">
+      <div class="expense-card-head">
+        <div class="expense-card-title">
+          <span class="mp-dot-sm" style="background:#a020f0"></span>
+          Wildberries · Июнь 2024
+        </div>
+        <div class="expense-card-total">74 071 ₽</div>
+      </div>
+      <div class="expense-table">
+        <div class="et-row">
+          <div class="et-label">💰 Комиссия за продажи</div>
+          <div class="et-bar-wrap"><div class="et-bar" style="width:65%;background:#7c3aed"></div></div>
+          <div class="et-val">48 320 ₽</div>
+        </div>
+        <div class="et-row">
+          <div class="et-label">🚚 Логистика и доставка</div>
+          <div class="et-bar-wrap"><div class="et-bar" style="width:17%;background:#9f67f7"></div></div>
+          <div class="et-val">12 840 ₽</div>
+        </div>
+        <div class="et-row">
+          <div class="et-label">📦 Хранение на складе</div>
+          <div class="et-bar-wrap"><div class="et-bar" style="width:11%;background:#c4b5fd"></div></div>
+          <div class="et-val">8 200 ₽</div>
+        </div>
+        <div class="et-row">
+          <div class="et-label">⚠️ Штрафы</div>
+          <div class="et-bar-wrap"><div class="et-bar" style="width:4%;background:#ef4444"></div></div>
+          <div class="et-val">3 210 ₽</div>
+        </div>
+        <div class="et-row">
+          <div class="et-label">📢 Реклама</div>
+          <div class="et-bar-wrap"><div class="et-bar" style="width:2%;background:#f59e0b"></div></div>
+          <div class="et-val">1 500 ₽</div>
         </div>
       </div>
-      <pre id="code-out"></pre>
+      <div class="expense-card-footer">
+        <span>Обновлено только что</span>
+        <span class="trend-up">↑ 12% к прошлому месяцу</span>
+      </div>
     </div>
   </div>
 </section>
@@ -38,25 +69,25 @@
 
 <!-- STATS -->
 <div class="stats-row">
-  <div class="reveal"><div class="stat-num"><span data-count="3">0</span></div><div class="stat-label">маркетплейса в одном API</div></div>
+  <div class="reveal"><div class="stat-num"><span data-count="3">0</span></div><div class="stat-label">маркетплейса в одном месте</div></div>
   <div class="reveal"><div class="stat-num"><span data-count="12">0</span><span class="acc">+</span></div><div class="stat-label">категорий расходов</div></div>
-  <div class="reveal"><div class="stat-num"><span data-count="200">0</span><span class="acc" style="font-size:1.8rem">мс</span></div><div class="stat-label">среднее время ответа</div></div>
+  <div class="reveal"><div class="stat-num"><span data-count="247">0</span></div><div class="stat-label">продавцов уже используют</div></div>
 </div>
 
 <!-- FEATURES -->
 <section class="section" id="features">
   <div class="reveal">
     <div class="s-label">Возможности</div>
-    <h2>Всё что нужно разработчику и продавцу</h2>
+    <h2>Перестаньте гадать —<br>знайте точно</h2>
   </div>
   <div class="feats">
     {% for feat in [
-      ("≡", "Единый формат", "Все маркетплейсы возвращают данные в одной JSON-схеме. Один парсер — три площадки."),
-      ("▦", "Готовый дашборд", "Веб-интерфейс с графиками, фильтрами по датам и маркетплейсам, экспорт в Excel."),
-      ("↗", "Исторические данные", "Запрашивайте расходы за любой период. Стройте тренды, сравнивайте месяцы."),
-      ("⬡", "Безопасная авторизация", "Токены маркетплейсов шифруются AES-256. OAuth 2.0 для доступа к API."),
-      ("▲", "Разбивка по статьям", "Комиссии, логистика, хранение, штрафы, реклама — каждая статья в поле."),
-      ("◎", "Авто-обновление", "Кэш с TTL — данные свежие всегда. Не нужно дёргать API вручную."),
+      ("📊", "Все расходы в одном окне", "Не нужно заходить в каждый маркетплейс отдельно. Все цифры собраны в одном месте."),
+      ("📅", "История за любой период", "Сравнивайте месяцы, смотрите динамику и находите когда расходы выросли."),
+      ("🔔", "Уведомления о штрафах", "Узнавайте о новых штрафах и удержаниях сразу — не в конце месяца."),
+      ("📈", "Наглядные графики", "Визуальные отчёты которые понятны без бухгалтера."),
+      ("📤", "Экспорт в Excel", "Выгружайте данные для бухгалтерии или своего учёта одной кнопкой."),
+      ("🔒", "Безопасно", "Ваши данные защищены. Мы не храним пароли от маркетплейсов."),
     ] %}
     <div class="feat reveal">
       <div class="feat-icon">{{ feat[0] }}</div>
@@ -72,13 +103,13 @@
   <div class="section">
     <div class="demo-inner">
       <div class="reveal">
-        <div class="s-label">Интерактивное демо</div>
+        <div class="s-label">Живое демо</div>
         <h2>Выберите маркетплейс</h2>
-        <p style="color:var(--ink2);font-size:14px;line-height:1.7;margin-bottom:1.5rem">Переключайтесь и смотрите реальный формат данных API.</p>
+        <p style="color:var(--ink2);font-size:14px;line-height:1.7;margin-bottom:1.5rem">Переключайтесь между площадками и смотрите реальный формат отчёта.</p>
         <div class="mp-selector">
-          <button class="mp-btn active" data-mp="wb">Wildberries</button>
-          <button class="mp-btn" data-mp="ozon">Ozon</button>
-          <button class="mp-btn" data-mp="ym">Яндекс Маркет</button>
+          <button class="mp-btn active" data-mp="wb">🟣 Wildberries</button>
+          <button class="mp-btn" data-mp="ozon">🔵 Ozon</button>
+          <button class="mp-btn" data-mp="ym">🔴 Яндекс Маркет</button>
         </div>
       </div>
       <div id="expense-panel" class="reveal"></div>
@@ -92,17 +123,16 @@
   <div class="cta-inner reveal">
     <div class="s-label">Ранний доступ</div>
     <h2>Запускаемся скоро</h2>
-    <p class="cta-sub">Оставьте email — пришлём доступ первыми и дадим 3 месяца Про бесплатно.</p>
+    <p class="cta-sub">Оставьте email — пришлём доступ первыми и дадим 3 месяца бесплатно.</p>
     <div class="email-row">
       <input type="email" id="email-in" placeholder="ваш@email.ru">
       <button class="btn" id="sub-btn">Получить доступ</button>
     </div>
-    <p style="font-size:12px;color:var(--muted);margin-top:1rem">Уже 247 продавцов в очереди</p>
+    <p style="font-size:12px;color:var(--muted);margin-top:1rem">Уже 247 продавцов в очереди · Спам не отправляем</p>
   </div>
 </section>
 
 {% endblock %}
-
 {% block scripts %}
 <script src="{{ url_for('static', filename='index.js') }}"></script>
 {% endblock %}
