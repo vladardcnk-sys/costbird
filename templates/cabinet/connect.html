@@ -25,7 +25,6 @@
       </div>
     </div>
 
-    <!-- MP SELECTOR -->
     <div class="mp-selector" style="margin-bottom:2rem">
       <a href="/cabinet/connect?mp=wildberries" class="mp-btn {% if mp == 'wildberries' %}active{% endif %}">🟣 Wildberries</a>
       <a href="/cabinet/connect?mp=ozon" class="mp-btn {% if mp == 'ozon' %}active{% endif %}">🔵 Ozon</a>
@@ -39,61 +38,154 @@
     {% endwith %}
 
     <div class="connect-grid">
-      <div class="auth-card" style="max-width:480px;margin:0">
+      <!-- FORM -->
+      <div class="auth-card" style="max-width:100%;margin:0">
         <form method="POST" action="/cabinet/connect" class="auth-form">
           <input type="hidden" name="marketplace" value="{{ mp }}">
 
+          {% if mp == 'wildberries' %}
           <div class="field">
-            <label>API-ключ *</label>
-            <input type="text" name="api_key" placeholder="Вставьте API-ключ" required>
+            <label>API-ключ Wildberries <span class="req-star">*</span></label>
+            <input type="text" name="api_key" placeholder="eyJhbGciOiJFUzI1NiIs..." required>
+            <span class="field-hint">Один ключ со всеми нужными правами доступа</span>
           </div>
 
-          {% if mp == 'ozon' %}
+          {% elif mp == 'ozon' %}
           <div class="field">
-            <label>Client-ID (для Ozon)</label>
-            <input type="text" name="client_id" placeholder="Числовой ID из настроек Ozon">
+            <label>Client-ID <span class="req-star">*</span></label>
+            <input type="text" name="client_id" placeholder="123456" required>
+            <span class="field-hint">Числовой ID из раздела API-ключи</span>
+          </div>
+          <div class="field">
+            <label>API-ключ <span class="req-star">*</span></label>
+            <input type="text" name="api_key" placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" required>
+            <span class="field-hint">Ключ с правами Admin read only</span>
+          </div>
+
+          {% elif mp == 'yandex_market' %}
+          <div class="field">
+            <label>OAuth-токен <span class="req-star">*</span></label>
+            <input type="text" name="api_key" placeholder="y0_AgAAAA..." required>
+            <span class="field-hint">Токен с правами на статистику и управление кампаниями</span>
+          </div>
+          <div class="field">
+            <label>Campaign ID <span class="req-star">*</span></label>
+            <input type="text" name="campaign_id" placeholder="12345678" required>
+            <span class="field-hint">ID магазина из адресной строки партнёрского кабинета</span>
           </div>
           {% endif %}
 
-          {% if mp == 'yandex_market' %}
-          <div class="field">
-            <label>Campaign ID (для Яндекс Маркет)</label>
-            <input type="text" name="campaign_id" placeholder="ID кампании из партнёрского кабинета">
-          </div>
-          {% endif %}
-
+          <div class="lock-note">🔒 Ключ хранится в зашифрованном виде. Мы используем только чтение данных — изменить что-либо в вашем кабинете невозможно.</div>
           <button type="submit" class="btn btn-full">Подключить {{ mp_info.name }}</button>
         </form>
       </div>
 
+      <!-- INSTRUCTIONS -->
       <div class="connect-help">
-        <h3 class="connect-help-title">Где найти API-ключ?</h3>
         {% if mp == 'wildberries' %}
+        <h3 class="connect-help-title">Как создать API-ключ в WB</h3>
         <ol class="help-steps">
           <li>Зайдите в <strong>Личный кабинет WB</strong> → Настройки</li>
           <li>Раздел <strong>Доступ к API</strong></li>
           <li>Нажмите <strong>Создать новый токен</strong></li>
-          <li>Выберите тип: <strong>Статистика</strong></li>
-          <li>Скопируйте токен и вставьте выше</li>
+          <li>Придумайте название, например: <strong>CostBird</strong></li>
+          <li>Поставьте галочки напротив <strong>всех следующих разделов:</strong></li>
         </ol>
+
+        <div class="permissions-list">
+          <div class="perm-item required">
+            <span class="perm-check">✓</span>
+            <div>
+              <div class="perm-name">Статистика</div>
+              <div class="perm-desc">Продажи, заказы, возвраты, комиссии, логистика, штрафы</div>
+            </div>
+          </div>
+          <div class="perm-item required">
+            <span class="perm-check">✓</span>
+            <div>
+              <div class="perm-name">Маркетплейс</div>
+              <div class="perm-desc">Остатки на складах, поставки, заказы FBS</div>
+            </div>
+          </div>
+          <div class="perm-item required">
+            <span class="perm-check">✓</span>
+            <div>
+              <div class="perm-name">Реклама</div>
+              <div class="perm-desc">Расходы на рекламу, кампании, CTR, ROI</div>
+            </div>
+          </div>
+          <div class="perm-item optional">
+            <span class="perm-check opt">✓</span>
+            <div>
+              <div class="perm-name">Аналитика</div>
+              <div class="perm-desc">ABC-анализ, воронка продаж, поисковые запросы</div>
+            </div>
+          </div>
+          <div class="perm-item optional">
+            <span class="perm-check opt">✓</span>
+            <div>
+              <div class="perm-name">Цены и скидки</div>
+              <div class="perm-desc">Юнит-экономика, управление ценами</div>
+            </div>
+          </div>
+          <div class="perm-item optional">
+            <span class="perm-check opt">✓</span>
+            <div>
+              <div class="perm-name">Контент</div>
+              <div class="perm-desc">Карточки товаров, фото, описания</div>
+            </div>
+          </div>
+        </div>
+
+        <ol class="help-steps" style="margin-top:.75rem">
+          <li>Нажмите <strong>Создать токен</strong></li>
+          <li>Скопируйте ключ — он показывается <strong>только один раз!</strong></li>
+          <li>Вставьте его в поле слева</li>
+        </ol>
+
+        <div class="help-note">💡 Минимум для старта: галочки <strong>Статистика</strong> и <strong>Маркетплейс</strong>. Остальные добавляют дополнительную аналитику.</div>
+
         {% elif mp == 'ozon' %}
+        <h3 class="connect-help-title">Как создать API-ключ в Ozon</h3>
         <ol class="help-steps">
-          <li>Зайдите в <strong>Личный кабинет Ozon Seller</strong></li>
-          <li>Настройки → <strong>API-ключи</strong></li>
+          <li>Зайдите в <strong>Ozon Seller</strong> → Настройки</li>
+          <li>Раздел <strong>API-ключи</strong></li>
           <li>Нажмите <strong>Добавить ключ</strong></li>
-          <li>Скопируйте <strong>Client-ID</strong> и <strong>API-ключ</strong></li>
+          <li>Выберите роль: <strong>Admin read only</strong></li>
+          <li>Скопируйте <strong>Client-ID</strong> (число) и <strong>API-ключ</strong></li>
         </ol>
+        <div class="help-note">💡 Роль Admin read only даёт доступ ко всем данным для чтения: продажи, финансы, аналитика, реклама.</div>
+
         {% elif mp == 'yandex_market' %}
+        <h3 class="connect-help-title">Как создать токен в Яндекс Маркет</h3>
         <ol class="help-steps">
           <li>Зайдите в <strong>partner.market.yandex.ru</strong></li>
-          <li>Настройки → <strong>API</strong></li>
-          <li>Создайте токен с доступом к статистике</li>
-          <li>Campaign ID найдите в адресной строке кабинета</li>
+          <li>Нажмите на имя аккаунта → <strong>OAuth-токен</strong></li>
+          <li>Создайте токен с правами: <strong>Управление кампаниями</strong> и <strong>Статистика</strong></li>
+          <li>Campaign ID найдите в адресной строке кабинета:<br>
+          <code style="font-size:11px;color:var(--acc3)">.../businesses/XXXXX/shops/<strong>CAMPAIGN_ID</strong>/...</code></li>
         </ol>
+        <div class="help-note">💡 Один токен даёт доступ ко всей статистике — продажи, комиссии, логистика, реклама.</div>
         {% endif %}
-        <div class="help-note">🔒 Мы используем ключи только для чтения данных. Пароли от аккаунта не нужны.</div>
       </div>
     </div>
   </main>
 </div>
+{% endblock %}
+
+{% block head %}
+<style>
+.req-star{color:#ef4444;font-size:12px}
+.field-hint{font-size:11px;color:var(--muted);margin-top:2px}
+.lock-note{font-size:12px;color:var(--muted);background:var(--acc-bg);border:1px solid var(--acc-border);border-radius:8px;padding:10px 12px;margin-top:.5rem}
+.connect-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start}
+.permissions-list{display:flex;flex-direction:column;gap:6px;margin:10px 0}
+.perm-item{display:flex;align-items:flex-start;gap:8px;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:9px 12px}
+.perm-item.required{border-color:var(--acc-border)}
+.perm-check{width:18px;height:18px;border-radius:4px;background:var(--acc);color:white;font-size:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;font-weight:600}
+.perm-check.opt{background:#10b981}
+.perm-name{font-size:13px;font-weight:600;color:var(--ink)}
+.perm-desc{font-size:11px;color:var(--muted);line-height:1.4;margin-top:1px}
+@media(max-width:900px){.connect-grid{grid-template-columns:1fr}}
+</style>
 {% endblock %}
