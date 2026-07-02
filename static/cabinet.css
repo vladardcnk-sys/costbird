@@ -1,0 +1,66 @@
+
+/* AUTH PAGES */
+.auth-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:2rem;position:relative;z-index:1}
+.auth-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:2.5rem;width:100%;max-width:420px}
+.auth-logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;color:var(--ink);margin-bottom:2rem}
+.auth-title{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;margin-bottom:.4rem}
+.auth-sub{font-size:14px;color:var(--ink2);margin-bottom:1.5rem}
+.auth-form{display:flex;flex-direction:column;gap:1rem}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-size:13px;font-weight:500;color:var(--ink2)}
+.field input{background:var(--bg2);border:1px solid var(--border);color:var(--ink);padding:11px 14px;border-radius:8px;font-size:14px;font-family:'Inter',sans-serif;outline:none;transition:border-color .15s}
+.field input:focus{border-color:var(--acc-border)}
+.field input::placeholder{color:var(--muted)}
+.btn-full{width:100%;justify-content:center;padding:12px}
+.auth-switch{font-size:13px;color:var(--ink2);text-align:center;margin-top:1.25rem}
+.auth-switch a{color:var(--acc3);text-decoration:none}
+.alert{padding:10px 14px;border-radius:8px;font-size:13px;margin-bottom:.5rem}
+.alert-error{background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.3);color:#fca5a5}
+.alert-success{background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.3);color:#6ee7b7}
+
+/* CABINET LAYOUT */
+.cab-wrap{display:grid;grid-template-columns:240px 1fr;min-height:100vh;position:relative;z-index:1}
+.sidebar{background:var(--bg2);border-right:1px solid var(--border);padding:1.5rem;display:flex;flex-direction:column;position:sticky;top:0;height:100vh}
+.side-nav{display:flex;flex-direction:column;gap:4px}
+.side-link{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;font-size:14px;color:var(--ink2);text-decoration:none;transition:all .15s}
+.side-link:hover{background:var(--acc-bg);color:var(--ink)}
+.side-link.active{background:var(--acc-bg);color:var(--acc3);border:1px solid var(--acc-border)}
+.cab-main{padding:2rem;overflow-y:auto}
+.cab-header{margin-bottom:2rem}
+.cab-title{font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;margin-bottom:.3rem}
+.cab-sub{font-size:14px;color:var(--ink2)}
+.cab-section{margin-bottom:2rem}
+.cab-section-title{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem}
+
+/* MP CARDS */
+.mp-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem}
+.mp-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.25rem;transition:all .2s}
+.mp-card:hover{border-color:var(--border2)}
+.mp-card.connected{border-color:var(--acc-border)}
+.mp-card-head{display:flex;align-items:center;gap:10px;margin-bottom:1rem}
+.mp-emoji{font-size:1.4rem}
+.mp-name{font-weight:500;font-size:15px;flex:1}
+.mp-status-dot{width:8px;height:8px;border-radius:50%;background:#10b981}
+.mp-status-dot.off{background:var(--muted)}
+.mp-card-actions{display:flex;gap:8px;flex-wrap:wrap}
+.btn-sm{font-size:12px;padding:6px 12px}
+
+/* EMPTY STATE */
+.empty-state{text-align:center;padding:4rem 2rem;color:var(--ink2)}
+.empty-icon{font-size:3rem;margin-bottom:1rem}
+.empty-state h3{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:700;color:var(--ink);margin-bottom:.5rem}
+.empty-state p{font-size:14px;margin-bottom:1.5rem;max-width:400px;margin-left:auto;margin-right:auto}
+
+/* CONNECT PAGE */
+.connect-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start}
+.connect-help{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem}
+.connect-help-title{font-weight:600;margin-bottom:1rem}
+.help-steps{padding-left:1.25rem;display:flex;flex-direction:column;gap:.6rem;font-size:14px;color:var(--ink2);line-height:1.6}
+.help-steps strong{color:var(--ink)}
+.help-note{margin-top:1rem;font-size:12px;color:var(--muted);background:var(--acc-bg);border:1px solid var(--acc-border);border-radius:8px;padding:10px 12px}
+
+@media(max-width:768px){
+  .cab-wrap{grid-template-columns:1fr}
+  .sidebar{display:none}
+  .connect-grid{grid-template-columns:1fr}
+}

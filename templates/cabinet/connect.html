@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% block title %}Подключить {{ mp_info.name }}{% endblock %}
+
+{% block content %}
+<div class="cab-wrap">
+  <aside class="sidebar">
+    <a href="/" class="auth-logo" style="margin-bottom:2rem">
+      <div class="logo-mark"><svg width="18" height="18" viewBox="0 0 16 16" fill="white"><path d="M14 2C14 2 10 1 7 4C4 7 3 11 3 13C3 13 5 11 7.5 11C10 11 11 13 11 13C11 13 13 8 14 2Z"/></svg></div>
+      CostBird
+    </a>
+    <nav class="side-nav">
+      <a href="/cabinet" class="side-link">📊 Дашборд</a>
+      <a href="/cabinet/expenses" class="side-link">💰 Расходы</a>
+      <a href="/cabinet/connect" class="side-link active">🔌 Подключить МП</a>
+      <a href="/cabinet/profile" class="side-link">👤 Профиль</a>
+    </nav>
+    <a href="/auth/logout" class="side-link" style="margin-top:auto;color:var(--muted)">↩ Выйти</a>
+  </aside>
+
+  <main class="cab-main">
+    <div class="cab-header">
+      <div>
+        <h1 class="cab-title">{{ mp_info.emoji }} Подключить {{ mp_info.name }}</h1>
+        <p class="cab-sub">Вставьте API-ключ из личного кабинета маркетплейса</p>
+      </div>
+    </div>
+
+    <!-- MP SELECTOR -->
+    <div class="mp-selector" style="margin-bottom:2rem">
+      <a href="/cabinet/connect?mp=wildberries" class="mp-btn {% if mp == 'wildberries' %}active{% endif %}">🟣 Wildberries</a>
+      <a href="/cabinet/connect?mp=ozon" class="mp-btn {% if mp == 'ozon' %}active{% endif %}">🔵 Ozon</a>
+      <a href="/cabinet/connect?mp=yandex_market" class="mp-btn {% if mp == 'yandex_market' %}active{% endif %}">🔴 Яндекс Маркет</a>
+    </div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for cat, msg in messages %}
+        <div class="alert alert-{{ cat }}" style="margin-bottom:1rem">{{ msg }}</div>
+      {% endfor %}
+    {% endwith %}
+
+    <div class="connect-grid">
+      <div class="auth-card" style="max-width:480px;margin:0">
+        <form method="POST" action="/cabinet/connect" class="auth-form">
+          <input type="hidden" name="marketplace" value="{{ mp }}">
+
+          <div class="field">
+            <label>API-ключ *</label>
+            <input type="text" name="api_key" placeholder="Вставьте API-ключ" required>
+          </div>
+
+          {% if mp == 'ozon' %}
+          <div class="field">
+            <label>Client-ID (для Ozon)</label>
+            <input type="text" name="client_id" placeholder="Числовой ID из настроек Ozon">
+          </div>
+          {% endif %}
+
+          {% if mp == 'yandex_market' %}
+          <div class="field">
+            <label>Campaign ID (для Яндекс Маркет)</label>
+            <input type="text" name="campaign_id" placeholder="ID кампании из партнёрского кабинета">
+          </div>
+          {% endif %}
+
+          <button type="submit" class="btn btn-full">Подключить {{ mp_info.name }}</button>
+        </form>
+      </div>
+
+      <div class="connect-help">
+        <h3 class="connect-help-title">Где найти API-ключ?</h3>
+        {% if mp == 'wildberries' %}
+        <ol class="help-steps">
+          <li>Зайдите в <strong>Личный кабинет WB</strong> → Настройки</li>
+          <li>Раздел <strong>Доступ к API</strong></li>
+          <li>Нажмите <strong>Создать новый токен</strong></li>
+          <li>Выберите тип: <strong>Статистика</strong></li>
+          <li>Скопируйте токен и вставьте выше</li>
+        </ol>
+        {% elif mp == 'ozon' %}
+        <ol class="help-steps">
+          <li>Зайдите в <strong>Личный кабинет Ozon Seller</strong></li>
+          <li>Настройки → <strong>API-ключи</strong></li>
+          <li>Нажмите <strong>Добавить ключ</strong></li>
+          <li>Скопируйте <strong>Client-ID</strong> и <strong>API-ключ</strong></li>
+        </ol>
+        {% elif mp == 'yandex_market' %}
+        <ol class="help-steps">
+          <li>Зайдите в <strong>partner.market.yandex.ru</strong></li>
+          <li>Настройки → <strong>API</strong></li>
+          <li>Создайте токен с доступом к статистике</li>
+          <li>Campaign ID найдите в адресной строке кабинета</li>
+        </ol>
+        {% endif %}
+        <div class="help-note">🔒 Мы используем ключи только для чтения данных. Пароли от аккаунта не нужны.</div>
+      </div>
+    </div>
+  </main>
+</div>
+{% endblock %}

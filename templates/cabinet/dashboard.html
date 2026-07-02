@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block title %}Личный кабинет{% endblock %}
+
+{% block content %}
+<div class="cab-wrap">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <a href="/" class="auth-logo" style="margin-bottom:2rem">
+      <div class="logo-mark"><svg width="18" height="18" viewBox="0 0 16 16" fill="white"><path d="M14 2C14 2 10 1 7 4C4 7 3 11 3 13C3 13 5 11 7.5 11C10 11 11 13 11 13C11 13 13 8 14 2Z"/></svg></div>
+      CostBird
+    </a>
+    <nav class="side-nav">
+      <a href="/cabinet" class="side-link active">📊 Дашборд</a>
+      <a href="/cabinet/expenses" class="side-link">💰 Расходы</a>
+      <a href="/cabinet/connect" class="side-link">🔌 Подключить МП</a>
+      <a href="/cabinet/profile" class="side-link">👤 Профиль</a>
+    </nav>
+    <a href="/auth/logout" class="side-link" style="margin-top:auto;color:var(--muted)">↩ Выйти</a>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="cab-main">
+    <div class="cab-header">
+      <div>
+        <h1 class="cab-title">Дашборд</h1>
+        <p class="cab-sub">Привет, {{ user.name }}! Вот сводка по вашим маркетплейсам.</p>
+      </div>
+    </div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for cat, msg in messages %}
+        <div class="alert alert-{{ cat }}" style="margin-bottom:1rem">{{ msg }}</div>
+      {% endfor %}
+    {% endwith %}
+
+    <!-- CONNECTED MARKETPLACES -->
+    {% if connected %}
+    <section class="cab-section">
+      <h2 class="cab-section-title">Подключённые маркетплейсы</h2>
+      <div class="mp-cards">
+        {% for mp in connected %}
+        <div class="mp-card connected">
+          <div class="mp-card-head">
+            <span class="mp-emoji">{{ mp.emoji }}</span>
+            <span class="mp-name">{{ mp.name }}</span>
+            <span class="mp-status-dot"></span>
+          </div>
+          <div class="mp-card-actions">
+            <a href="/cabinet/expenses?mp={{ mp.key }}" class="btn btn-sm">Смотреть расходы</a>
+            <form method="POST" action="/cabinet/disconnect" style="display:inline">
+              <input type="hidden" name="marketplace" value="{{ mp.key }}">
+              <button type="submit" class="btn btn-sm btn-ghost">Отключить</button>
+            </form>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+    {% endif %}
+
+    <!-- NOT CONNECTED -->
+    {% if not_connected %}
+    <section class="cab-section">
+      <h2 class="cab-section-title">Доступные маркетплейсы</h2>
+      <div class="mp-cards">
+        {% for mp in not_connected %}
+        <div class="mp-card">
+          <div class="mp-card-head">
+            <span class="mp-emoji">{{ mp.emoji }}</span>
+            <span class="mp-name">{{ mp.name }}</span>
+            <span class="mp-status-dot off"></span>
+          </div>
+          <div class="mp-card-actions">
+            <a href="/cabinet/connect?mp={{ mp.key }}" class="btn btn-sm">Подключить</a>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+    {% endif %}
+
+    {% if not connected %}
+    <div class="empty-state">
+      <div class="empty-icon">🔌</div>
+      <h3>Подключите первый маркетплейс</h3>
+      <p>Добавьте API-ключ чтобы CostBird начал собирать данные о ваших расходах.</p>
+      <a href="/cabinet/connect" class="btn">Подключить маркетплейс</a>
+    </div>
+    {% endif %}
+  </main>
+</div>
+{% endblock %}
