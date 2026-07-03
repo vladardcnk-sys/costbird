@@ -5,6 +5,7 @@ from routes.site import site
 from routes.api import api
 from routes.auth import auth
 from routes.cabinet import cabinet
+from routes.wb_api import wb_api
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -14,6 +15,7 @@ app.register_blueprint(site)
 app.register_blueprint(api)
 app.register_blueprint(auth)
 app.register_blueprint(cabinet)
+app.register_blueprint(wb_api)
 
 with app.app_context():
     init_db()
