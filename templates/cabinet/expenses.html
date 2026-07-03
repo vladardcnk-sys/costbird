@@ -58,7 +58,7 @@ async function load(){
   document.getElementById('err').style.display = 'none';
   document.getElementById('result').innerHTML = '';
   try {
-    var resp = await fetch('/cabinet/api/wb-expenses?from=' + from + '&to=' + to);
+    var resp = await fetch('/cabinet/api/wb-expenses?from=' + from + '&to=' + to, {credentials: 'same-origin'});
     var data = await resp.json();
     document.getElementById('loading').style.display = 'none';
     if(data.error){
