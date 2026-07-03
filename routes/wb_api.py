@@ -39,14 +39,14 @@ def wb_expenses():
             )
             if resp.status_code == 401:
                 return jsonify({"error": "Неверный API-ключ WB"}), 400
-            sales = resp.json() or []
+            data = resp.json(); sales = data if isinstance(data, list) else []
 
             resp2 = client.get(
                 "https://statistics-api.wildberries.ru/api/v5/supplier/reportDetailByPeriod",
                 headers={"Authorization": token},
                 params={"dateFrom": date_from, "dateTo": date_to, "flag": 1, "rrdid": 0, "limit": 100000},
             )
-            returns = resp2.json() or []
+            data2 = resp2.json(); returns = data2 if isinstance(data2, list) else []
     except Exception as e:
         return jsonify({"error": f"Ошибка соединения: {str(e)}"}), 500
 
