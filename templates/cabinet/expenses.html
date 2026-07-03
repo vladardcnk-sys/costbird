@@ -1,53 +1,8 @@
 {% extends "base.html" %}
 {% block title %}Расходы{% endblock %}
-
 {% block head %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
-<style>
-.date-row{display:flex;align-items:center;gap:10px;margin-bottom:1.5rem;flex-wrap:wrap}
-.date-input{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:13px;color:var(--ink);font-family:'Inter',sans-serif}
-.quick-btn{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:7px 14px;font-size:12px;color:var(--ink2);cursor:pointer;font-family:'Inter',sans-serif;transition:all .15s}
-.quick-btn:hover,.quick-btn.active{background:var(--acc-bg);border-color:var(--acc-border);color:var(--acc3)}
-.load-btn{background:var(--acc);color:white;border:none;border-radius:8px;padding:8px 18px;font-size:13px;font-weight:500;cursor:pointer;font-family:'Inter',sans-serif}
-.load-btn:hover{opacity:.85}
-.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.5rem}
-.kpi{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.25rem}
-.kpi-label{font-size:11px;color:var(--muted);margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.06em}
-.kpi-val{font-size:1.6rem;font-weight:800;font-family:'Syne',sans-serif;color:var(--ink);line-height:1.1}
-.kpi-sub{font-size:12px;margin-top:.3rem;color:var(--muted)}
-.kpi-sub.red{color:#ef4444}.kpi-sub.green{color:#10b981}
-.charts-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem}
-.chart-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem}
-.chart-title{font-size:14px;font-weight:600;margin-bottom:1rem;color:var(--ink)}
-.chart-wrap{position:relative;height:220px}
-.table-card{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:1.5rem}
-.table-head{padding:1rem 1.5rem;border-bottom:1px solid var(--border);display:flex;justify-content:space-between}
-.table-title{font-size:14px;font-weight:600;color:var(--ink)}
-table{width:100%;border-collapse:collapse}
-th{padding:.7rem 1.5rem;text-align:left;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid var(--border);background:var(--bg2)}
-td{padding:.8rem 1.5rem;font-size:13px;color:var(--ink2);border-bottom:1px solid var(--border)}
-td:first-child{color:var(--ink);font-weight:500}
-tr:last-child td{border-bottom:none}
-tr:hover td{background:var(--bg2)}
-.badge{display:inline-block;font-size:11px;padding:3px 10px;border-radius:20px;font-weight:500}
-.b-c{background:rgba(124,58,237,.15);color:#c4b5fd}
-.b-l{background:rgba(59,130,246,.15);color:#93c5fd}
-.b-s{background:rgba(16,185,129,.15);color:#6ee7b7}
-.b-f{background:rgba(239,68,68,.15);color:#fca5a5}
-.b-a{background:rgba(245,158,11,.15);color:#fcd34d}
-.b-r{background:rgba(139,92,246,.15);color:#c4b5fd}
-.loading{text-align:center;padding:3rem;color:var(--muted);font-size:14px}
-.error-box{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);border-radius:10px;padding:1rem 1.5rem;color:#fca5a5;font-size:13px;margin-bottom:1rem}
-.pnl-card{background:var(--acc-bg);border:1px solid var(--acc-border);border-radius:12px;padding:1.5rem;margin-bottom:1.5rem}
-.pnl-title{font-size:13px;font-weight:600;color:var(--acc3);margin-bottom:1rem;text-transform:uppercase;letter-spacing:.06em}
-.pnl-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
-.pnl-label{font-size:11px;color:var(--muted);margin-bottom:.3rem;text-align:center}
-.pnl-val{font-size:1.4rem;font-weight:700;font-family:'Syne',sans-serif;text-align:center}
-.pnl-val.green{color:#10b981}.pnl-val.red{color:#ef4444}.pnl-val.white{color:var(--ink)}
-@media(max-width:900px){.kpi-grid{grid-template-columns:repeat(2,1fr)}.charts-grid{grid-template-columns:1fr}.pnl-grid{grid-template-columns:1fr}}
-</style>
 {% endblock %}
-
 {% block content %}
 <div class="cab-wrap">
   <aside class="sidebar">
@@ -56,218 +11,82 @@ tr:hover td{background:var(--bg2)}
       CostBird
     </a>
     <nav class="side-nav">
-      <a href="/cabinet" class="side-link">📊 Дашборд</a>
-      <a href="/cabinet/expenses" class="side-link active">💰 Расходы</a>
-      <a href="/cabinet/connect" class="side-link">🔌 Подключить МП</a>
-      <a href="/cabinet/profile" class="side-link">👤 Профиль</a>
+      <a href="/cabinet" class="side-link">Дашборд</a>
+      <a href="/cabinet/expenses" class="side-link active">Расходы</a>
+      <a href="/cabinet/connect" class="side-link">Подключить МП</a>
+      <a href="/cabinet/profile" class="side-link">Профиль</a>
     </nav>
-    <a href="/auth/logout" class="side-link" style="margin-top:auto;color:var(--muted)">↩ Выйти</a>
+    <a href="/auth/logout" class="side-link" style="margin-top:auto;color:var(--muted)">Выйти</a>
   </aside>
-
   <main class="cab-main">
-    <div class="cab-header">
-      <h1 class="cab-title">💰 Расходы и оборот</h1>
-      <p class="cab-sub">Реальные данные из Wildberries</p>
-    </div>
-
+    <h1 class="cab-title">Расходы</h1>
+    <p class="cab-sub">Реальные данные из Wildberries</p>
     {% if not creds %}
     <div class="empty-state">
       <div class="empty-icon">🔌</div>
       <h3>Нет подключённых маркетплейсов</h3>
-      <p>Подключите маркетплейс чтобы видеть реальные данные.</p>
-      <a href="/cabinet/connect" class="btn">Подключить маркетплейс</a>
+      <a href="/cabinet/connect" class="btn">Подключить</a>
     </div>
     {% else %}
-
-    <div class="date-row">
-      <label style="font-size:13px;color:var(--muted)">С</label>
-      <input type="date" class="date-input" id="date-from">
-      <label style="font-size:13px;color:var(--muted)">по</label>
-      <input type="date" class="date-input" id="date-to">
-      <div style="display:flex;gap:6px;flex-wrap:wrap">
-        <button class="quick-btn" onclick="setQuick(7,this)">7 дней</button>
-        <button class="quick-btn active" onclick="setQuick(30,this)">30 дней</button>
-        <button class="quick-btn" onclick="setQuick(90,this)">3 месяца</button>
-        <button class="quick-btn" onclick="setQuick(365,this)">Год</button>
-        <button class="quick-btn" onclick="setMonth(this)">Этот месяц</button>
-      </div>
-      <button class="load-btn" onclick="loadData()">Загрузить ↗</button>
+    <div style="margin-bottom:1rem">
+      <input type="date" id="df" style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:13px;color:var(--ink);margin-right:8px">
+      <input type="date" id="dt" style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:13px;color:var(--ink);margin-right:8px">
+      <button onclick="load()" style="background:var(--acc);color:white;border:none;border-radius:8px;padding:9px 20px;font-size:13px;cursor:pointer">Загрузить</button>
     </div>
-
-    <div id="error-box" style="display:none" class="error-box"></div>
-    <div id="loading" class="loading" style="display:none">⏳ Загружаем данные из Wildberries...</div>
-
-    <div class="pnl-card" id="pnl-section" style="display:none">
-      <div class="pnl-title">📊 P&L · <span id="pnl-period"></span></div>
-      <div class="pnl-grid">
-        <div><div class="pnl-label">Оборот</div><div class="pnl-val white" id="pnl-rev">—</div></div>
-        <div><div class="pnl-label">Расходы WB</div><div class="pnl-val red" id="pnl-exp">—</div></div>
-        <div><div class="pnl-label">Выплата от WB</div><div class="pnl-val green" id="pnl-pay">—</div></div>
-      </div>
-      <div style="margin-top:1rem;font-size:12px;color:var(--muted);border-top:1px solid var(--acc-border);padding-top:.75rem">
-        💡 Скоро: укажите себестоимость и АУР — CostBird посчитает чистую прибыль
-      </div>
-    </div>
-
-    <div class="kpi-grid" id="kpi-section" style="display:none">
-      <div class="kpi"><div class="kpi-label">Оборот</div><div class="kpi-val" id="k-rev">—</div><div class="kpi-sub" id="k-orders"></div></div>
-      <div class="kpi"><div class="kpi-label">Комиссии WB</div><div class="kpi-val" id="k-comm">—</div><div class="kpi-sub red" id="k-comm-pct"></div></div>
-      <div class="kpi"><div class="kpi-label">Логистика</div><div class="kpi-val" id="k-log">—</div><div class="kpi-sub red" id="k-log-pct"></div></div>
-      <div class="kpi"><div class="kpi-label">Возвраты</div><div class="kpi-val" id="k-ret">—</div><div class="kpi-sub" id="k-ret-cnt"></div></div>
-    </div>
-
-    <div class="charts-grid" id="charts-section" style="display:none">
-      <div class="chart-card">
-        <div class="chart-title">Оборот и расходы по дням</div>
-        <div class="chart-wrap"><canvas id="line-chart"></canvas></div>
-      </div>
-      <div class="chart-card">
-        <div class="chart-title">Структура расходов</div>
-        <div class="chart-wrap"><canvas id="donut-chart"></canvas></div>
-      </div>
-    </div>
-
-    <div class="table-card" id="table-section" style="display:none">
-      <div class="table-head">
-        <span class="table-title">Детализация расходов</span>
-        <span style="font-size:12px;color:var(--muted)" id="table-period"></span>
-      </div>
-      <table>
-        <thead><tr><th>Категория</th><th>Сумма</th><th>Доля от расходов</th></tr></thead>
-        <tbody id="exp-table"></tbody>
-      </table>
-    </div>
+    <div id="err" style="display:none;padding:1rem;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);border-radius:8px;color:#fca5a5;margin-bottom:1rem"></div>
+    <div id="loading" style="display:none;padding:2rem;text-align:center;color:var(--muted)">Загружаем данные из WB...</div>
+    <div id="result"></div>
     {% endif %}
   </main>
 </div>
-
 <script>
-let lineChart=null, donutChart=null;
-function fmt(n){return Math.round(n).toLocaleString('ru-RU')+' ₽'}
-function pct(a,b){return b>0?Math.round(a/b*100)+'%':'—'}
-
-function setQuick(days,btn){
-  document.querySelectorAll('.quick-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  const to=new Date(), from=new Date();
-  from.setDate(from.getDate()-days);
-  document.getElementById('date-from').value=from.toISOString().slice(0,10);
-  document.getElementById('date-to').value=to.toISOString().slice(0,10);
+var from_el = document.getElementById('df');
+var to_el = document.getElementById('dt');
+if(from_el){
+  var now = new Date();
+  var ago = new Date();
+  ago.setDate(ago.getDate() - 30);
+  from_el.value = ago.toISOString().substr(0,10);
+  to_el.value = now.toISOString().substr(0,10);
 }
-function setMonth(btn){
-  document.querySelectorAll('.quick-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  const now=new Date();
-  document.getElementById('date-from').value=new Date(now.getFullYear(),now.getMonth(),1).toISOString().slice(0,10);
-  document.getElementById('date-to').value=now.toISOString().slice(0,10);
-}
-
-async function loadData(){
-  const from=document.getElementById('date-from').value;
-  const to=document.getElementById('date-to').value;
-  if(!from||!to){alert('Выберите период');return;}
-  document.getElementById('loading').style.display='block';
-  document.getElementById('error-box').style.display='none';
-  ['pnl-section','kpi-section','charts-section','table-section'].forEach(id=>
-    document.getElementById(id).style.display='none');
-  try{
-    const resp=await fetch(`/cabinet/api/wb-expenses?from=${from}&to=${to}`);
-    const data=await resp.json();
-    document.getElementById('loading').style.display='none';
+function fmt(n){ return Math.round(n).toLocaleString('ru-RU') + ' руб'; }
+function pct(a,b){ return b > 0 ? Math.round(a/b*100) + '%' : '0%'; }
+async function load(){
+  var from = document.getElementById('df').value;
+  var to = document.getElementById('dt').value;
+  document.getElementById('loading').style.display = 'block';
+  document.getElementById('err').style.display = 'none';
+  document.getElementById('result').innerHTML = '';
+  try {
+    var resp = await fetch('/cabinet/api/wb-expenses?from=' + from + '&to=' + to);
+    var data = await resp.json();
+    document.getElementById('loading').style.display = 'none';
     if(data.error){
-      document.getElementById('error-box').textContent='❌ '+data.error;
-      document.getElementById('error-box').style.display='block';
+      document.getElementById('err').textContent = data.error;
+      document.getElementById('err').style.display = 'block';
       return;
     }
-    renderData(data);
-  }catch(e){
-    document.getElementById('loading').style.display='none';
-    document.getElementById('error-box').textContent='❌ Ошибка: '+e.message;
-    document.getElementById('error-box').style.display='block';
+    var t = data.totals;
+    var html = '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1.5rem">';
+    html += '<div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.25rem"><div style="font-size:11px;color:var(--muted);text-transform:uppercase;margin-bottom:.4rem">Оборот</div><div style="font-size:1.5rem;font-weight:800;color:var(--ink)">' + fmt(t.revenue) + '</div><div style="font-size:12px;color:var(--muted)">' + t.orders + ' заказов</div></div>';
+    html += '<div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.25rem"><div style="font-size:11px;color:var(--muted);text-transform:uppercase;margin-bottom:.4rem">Расходы WB</div><div style="font-size:1.5rem;font-weight:800;color:#ef4444">' + fmt(t.total_expenses) + '</div><div style="font-size:12px;color:var(--muted)">' + pct(t.total_expenses,t.revenue) + ' от оборота</div></div>';
+    html += '<div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.25rem"><div style="font-size:11px;color:var(--muted);text-transform:uppercase;margin-bottom:.4rem">Выплата WB</div><div style="font-size:1.5rem;font-weight:800;color:#10b981">' + fmt(t.payout) + '</div><div style="font-size:12px;color:var(--muted)">к получению</div></div>';
+    html += '</div>';
+    html += '<div style="background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden">';
+    html += '<div style="padding:1rem 1.5rem;border-bottom:1px solid var(--border);font-size:14px;font-weight:600;color:var(--ink)">Детализация расходов</div>';
+    html += '<table style="width:100%;border-collapse:collapse">';
+    html += '<tr style="background:var(--bg2)"><th style="padding:.7rem 1.5rem;text-align:left;font-size:11px;color:var(--muted);text-transform:uppercase">Категория</th><th style="padding:.7rem 1.5rem;text-align:left;font-size:11px;color:var(--muted);text-transform:uppercase">Сумма</th><th style="padding:.7rem 1.5rem;text-align:left;font-size:11px;color:var(--muted);text-transform:uppercase">Доля</th></tr>';
+    var rows = [['Комиссия WB', t.commission],['Логистика', t.logistics],['Хранение', t.storage],['Штрафы', t.fines],['Реклама', t.ads],['Возвраты', t.returns_sum]];
+    for(var i=0;i<rows.length;i++){
+      html += '<tr><td style="padding:.8rem 1.5rem;border-bottom:1px solid var(--border);color:var(--ink)">' + rows[i][0] + '</td><td style="padding:.8rem 1.5rem;border-bottom:1px solid var(--border);color:var(--ink);font-family:monospace">' + fmt(rows[i][1]) + '</td><td style="padding:.8rem 1.5rem;border-bottom:1px solid var(--border);color:var(--muted)">' + pct(rows[i][1],t.total_expenses) + '</td></tr>';
+    }
+    html += '</table></div>';
+    document.getElementById('result').innerHTML = html;
+  } catch(e) {
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('err').textContent = 'Ошибка соединения: ' + e.message;
+    document.getElementById('err').style.display = 'block';
   }
 }
-
-function renderData(data){
-  const t=data.totals;
-  const period=`${data.period.from} — ${data.period.to}`;
-  document.getElementById('pnl-section').style.display='block';
-  document.getElementById('pnl-period').textContent=period;
-  document.getElementById('pnl-rev').textContent=fmt(t.revenue);
-  document.getElementById('pnl-exp').textContent=fmt(t.total_expenses);
-  document.getElementById('pnl-pay').textContent=fmt(t.payout);
-  document.getElementById('kpi-section').style.display='grid';
-  document.getElementById('k-rev').textContent=fmt(t.revenue);
-  document.getElementById('k-orders').textContent=t.orders+' заказов';
-  document.getElementById('k-comm').textContent=fmt(t.commission);
-  document.getElementById('k-comm-pct').textContent=pct(t.commission,t.revenue)+' от оборота';
-  document.getElementById('k-log').textContent=fmt(t.logistics);
-  document.getElementById('k-log-pct').textContent=pct(t.logistics,t.revenue)+' от оборота';
-  document.getElementById('k-ret').textContent=fmt(t.returns_sum);
-  document.getElementById('k-ret-cnt').textContent=t.return_count+' возвратов';
-  document.getElementById('charts-section').style.display='grid';
-  renderLine(data.by_day);
-  renderDonut(t);
-  document.getElementById('table-section').style.display='block';
-  document.getElementById('table-period').textContent=period;
-  renderTable(t);
-}
-
-function renderLine(byDay){
-  const ctx=document.getElementById('line-chart').getContext('2d');
-  if(lineChart)lineChart.destroy();
-  lineChart=new Chart(ctx,{
-    type:'line',
-    data:{labels:byDay.labels,datasets:[
-      {label:'Оборот',data:byDay.revenue,borderColor:'#10b981',backgroundColor:'rgba(16,185,129,.1)',tension:0.3,fill:true,pointRadius:2},
-      {label:'Расходы',data:byDay.expenses,borderColor:'#ef4444',backgroundColor:'rgba(239,68,68,.08)',tension:0.3,fill:true,pointRadius:2},
-    ]},
-    options:{responsive:true,maintainAspectRatio:false,
-      interaction:{intersect:false,mode:'index'},
-      scales:{x:{grid:{color:'rgba(255,255,255,.05)'},ticks:{color:'#8892b0',maxTicksLimit:8}},
-              y:{grid:{color:'rgba(255,255,255,.05)'},ticks:{color:'#8892b0',callback:v=>Math.round(v/1000)+'К ₽'}}},
-      plugins:{legend:{labels:{color:'#8892b0',font:{size:12}}},
-        tooltip:{callbacks:{label:d=>`${d.dataset.label}: ${fmt(d.raw)}`}}}}
-  });
-}
-
-function renderDonut(t){
-  const ctx=document.getElementById('donut-chart').getContext('2d');
-  if(donutChart)donutChart.destroy();
-  const labels=['Комиссии','Логистика','Хранение','Штрафы','Реклама','Возвраты'];
-  const values=[t.commission,t.logistics,t.storage,t.fines,t.ads,t.returns_sum];
-  const colors=['#7c3aed','#3b82f6','#10b981','#ef4444','#f59e0b','#8b5cf6'];
-  const total=values.reduce((a,b)=>a+b,0);
-  donutChart=new Chart(ctx,{
-    type:'doughnut',
-    data:{labels,datasets:[{data:values,backgroundColor:colors,borderWidth:0,hoverOffset:6}]},
-    options:{responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{position:'right',labels:{color:'#8892b0',font:{size:11},padding:10}},
-        tooltip:{callbacks:{label:d=>`${d.label}: ${fmt(d.raw)} (${pct(d.raw,total)})`}}}}
-  });
-}
-
-function renderTable(t){
-  const rows=[
-    {label:'Комиссия WB',val:t.commission,badge:'b-c'},
-    {label:'Логистика',val:t.logistics,badge:'b-l'},
-    {label:'Хранение',val:t.storage,badge:'b-s'},
-    {label:'Штрафы',val:t.fines,badge:'b-f'},
-    {label:'Реклама',val:t.ads,badge:'b-a'},
-    {label:'Возвраты',val:t.returns_sum,badge:'b-r'},
-  ];
-  const total=t.total_expenses;
-  document.getElementById('exp-table').innerHTML=rows.map(r=>`
-    <tr><td><span class="badge ${r.badge}">${r.label}</span></td>
-    <td style="font-family:'Fira Code',monospace;color:var(--ink)">${fmt(r.val)}</td>
-    <td style="color:var(--muted)">${pct(r.val,total)}</td></tr>`).join('');
-}
-
-(function init(){
-  const to=new Date(), from=new Date();
-  from.setDate(from.getDate()-30);
-  document.getElementById('date-from').value=from.toISOString().slice(0,10);
-  document.getElementById('date-to').value=to.toISOString().slice(0,10);
-  loadData();
-})();
 </script>
 {% endblock %}
